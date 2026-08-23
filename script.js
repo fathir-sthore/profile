@@ -136,16 +136,27 @@ function renderPlaylist() {
 function loadTrack(index, autoplay) {
     currentTrack = (index + playlist.length) % playlist.length;
     const track = playlist[currentTrack];
+    audioPlayer.pause();
     audioPlayer.src = track.src;
+    audioPlayer.load();
     songTitleEl.textContent = track.title;
     songIndexEl.textContent = `${currentTrack + 1} / ${playlist.length}`;
     progress.style.width = '0%';
     currentTimeEl.textContent = '0:00';
+    durationEl.textContent = '0:00';
     renderPlaylist();
     if (autoplay) {
-        audioPlayer.play();
-        playBtn.classList.add('playing');
-        playBtn.textContent = '⏸';
+        const playPromise = audioPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                playBtn.classList.add('playing');
+                playBtn.textContent = '⏸';
+            }).catch((err) => {
+                console.error('Playback failed:', err);
+                playBtn.classList.remove('playing');
+                playBtn.textContent = '▶';
+            });
+        }
     } else {
         playBtn.classList.remove('playing');
         playBtn.textContent = '▶';
