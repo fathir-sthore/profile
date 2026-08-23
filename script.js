@@ -96,18 +96,65 @@ document.querySelectorAll('.skill-card, .project-card, .service-card, .friend-ca
 });
 
 // ========================================
-// MUSIC PLAYER
+// MUSIC PLAYER (PLAYLIST)
 // ========================================
+
+const playlist = [
+    { title: 'Astaga Bercanda', src: 'assets/audio/music.mp3' },
+    { title: 'Cincin', src: 'assets/audio/cincin.m4a' },
+    { title: 'MMG - My Mine Gueh', src: 'assets/audio/mmg-my-mine-gueh.m4a' },
+    { title: 'Teh Hijau', src: 'assets/audio/teh-hijau.m4a' }
+];
+let currentTrack = 0;
 
 const audioPlayer = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
 const progressBar = document.querySelector('.progress-bar');
 const progress = document.getElementById('progress');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
 const volumeControl = document.getElementById('volumeControl');
+const songTitleEl = document.getElementById('songTitle');
+const songIndexEl = document.getElementById('songIndex');
+const playlistEl = document.getElementById('playlist');
+
+function renderPlaylist() {
+    if (!playlistEl) return;
+    playlistEl.innerHTML = '';
+    playlist.forEach((track, index) => {
+        const item = document.createElement('button');
+        item.className = 'playlist-item';
+        item.textContent = track.title;
+        if (index === currentTrack) item.classList.add('active');
+        item.addEventListener('click', () => loadTrack(index, true));
+        playlistEl.appendChild(item);
+    });
+}
+
+function loadTrack(index, autoplay) {
+    currentTrack = (index + playlist.length) % playlist.length;
+    const track = playlist[currentTrack];
+    audioPlayer.src = track.src;
+    songTitleEl.textContent = track.title;
+    songIndexEl.textContent = `${currentTrack + 1} / ${playlist.length}`;
+    progress.style.width = '0%';
+    currentTimeEl.textContent = '0:00';
+    renderPlaylist();
+    if (autoplay) {
+        audioPlayer.play();
+        playBtn.classList.add('playing');
+        playBtn.textContent = '⏸';
+    } else {
+        playBtn.classList.remove('playing');
+        playBtn.textContent = '▶';
+    }
+}
 
 if (audioPlayer && playBtn) {
+    renderPlaylist();
+
     // Play/Pause button
     playBtn.addEventListener('click', () => {
         if (audioPlayer.paused) {
@@ -120,6 +167,10 @@ if (audioPlayer && playBtn) {
             playBtn.textContent = '▶';
         }
     });
+
+    // Next / Previous track
+    if (nextBtn) nextBtn.addEventListener('click', () => loadTrack(currentTrack + 1, true));
+    if (prevBtn) prevBtn.addEventListener('click', () => loadTrack(currentTrack - 1, true));
 
     // Update progress bar
     audioPlayer.addEventListener('timeupdate', () => {
@@ -151,11 +202,9 @@ if (audioPlayer && playBtn) {
         audioPlayer.volume = 0.7;
     }
 
-    // Reset button on ended
+    // Auto-play next track when current one ends
     audioPlayer.addEventListener('ended', () => {
-        playBtn.classList.remove('playing');
-        playBtn.textContent = '▶';
-        audioPlayer.currentTime = 0;
+        loadTrack(currentTrack + 1, true);
     });
 }
 

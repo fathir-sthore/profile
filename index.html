@@ -102,11 +102,7 @@
                 </div>
                 <div class="about-avatar">
                     <div class="avatar-placeholder">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="200" height="200" fill="#ffd400"/>
-                            <circle cx="100" cy="70" r="35" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="3"/>
-                            <path d="M 50 150 Q 100 130 150 150 L 150 200 L 50 200 Z" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="3"/>
-                        </svg>
+                        <img src="assets/images/profile.png" alt="Fathir Sthore" class="profile-photo">
                     </div>
                 </div>
             </div>
@@ -494,12 +490,15 @@
             <div class="music-card">
                 <div class="music-info">
                     <h3>Now Playing</h3>
-                    <p class="song-title">Astaga Bercanda</p>
+                    <p class="song-title" id="songTitle">Astaga Bercanda</p>
+                    <p class="song-index" id="songIndex">1 / 4</p>
                 </div>
                 <div class="music-player">
-                    <audio id="audioPlayer" src="https://raw.githubusercontent.com/fathir-sthore/profile/main/assets/audio/music.mp3" preload="metadata"></audio>
+                    <audio id="audioPlayer" src="assets/audio/music.mp3" preload="metadata"></audio>
                     <div class="player-controls">
+                        <button id="prevBtn" class="skip-btn" title="Previous">⏮</button>
                         <button id="playBtn" class="play-btn">▶</button>
+                        <button id="nextBtn" class="skip-btn" title="Next">⏭</button>
                         <div class="progress-container">
                             <span id="currentTime" class="time">0:00</span>
                             <div class="progress-bar">
@@ -512,6 +511,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="playlist" id="playlist"></div>
+            </div>
+        </div>
             </div>
         </div>
     </section>
