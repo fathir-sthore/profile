@@ -1117,8 +1117,10 @@ a {
     box-shadow: 12px 12px 0 var(--black);
 }
 
-.contact-btn .icon {
-    font-size: 1.3rem;
+.contact-btn .icon-svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
 .contact-btn.telegram {
