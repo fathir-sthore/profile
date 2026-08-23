@@ -315,4 +315,27 @@ if ('IntersectionObserver' in window) {
 // INITIALIZE
 // ========================================
 
+// ========================================
+// QR IMAGE FALLBACK
+// ========================================
+
+const qrImage = document.getElementById('qrImage');
+if (qrImage) {
+    qrImage.addEventListener('error', () => {
+        const fallback = document.createElement('div');
+        fallback.textContent = 'QR';
+        fallback.style.width = '100%';
+        fallback.style.height = '100%';
+        fallback.style.background = '#ffd400';
+        fallback.style.border = '3px solid #0a0a0a';
+        fallback.style.display = 'flex';
+        fallback.style.alignItems = 'center';
+        fallback.style.justifyContent = 'center';
+        fallback.style.color = '#0a0a0a';
+        fallback.style.fontSize = '32px';
+        fallback.style.fontWeight = '900';
+        qrImage.replaceWith(fallback);
+    });
+}
+
 console.log('FATHIR Portfolio loaded successfully');
