@@ -11,7 +11,6 @@ if (hamburger && navMenu) {
         navMenu.classList.toggle('active');
     });
 
-    // Close menu when a link is clicked
     const navLinks = navMenu.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -34,7 +33,6 @@ function updateActiveNav() {
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             if (window.pageYOffset >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
@@ -69,7 +67,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ========================================
-// SCROLL ANIMATIONS (IntersectionObserver)
+// SCROLL ANIMATIONS
 // ========================================
 
 const observerOptions = {
@@ -87,7 +85,6 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observe animated elements
 document.querySelectorAll('.skill-card, .project-card, .service-card, .friend-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -166,7 +163,6 @@ function loadTrack(index, autoplay) {
 if (audioPlayer && playBtn) {
     renderPlaylist();
 
-    // Play/Pause button
     playBtn.addEventListener('click', () => {
         if (audioPlayer.paused) {
             audioPlayer.play();
@@ -179,11 +175,9 @@ if (audioPlayer && playBtn) {
         }
     });
 
-    // Next / Previous track
     if (nextBtn) nextBtn.addEventListener('click', () => loadTrack(currentTrack + 1, true));
     if (prevBtn) prevBtn.addEventListener('click', () => loadTrack(currentTrack - 1, true));
 
-    // Update progress bar
     audioPlayer.addEventListener('timeupdate', () => {
         if (audioPlayer.duration) {
             const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -192,34 +186,28 @@ if (audioPlayer && playBtn) {
         }
     });
 
-    // Set duration when metadata is loaded
     audioPlayer.addEventListener('loadedmetadata', () => {
         durationEl.textContent = formatTime(audioPlayer.duration);
     });
 
-    // Seek on progress bar click
     progressBar.addEventListener('click', (e) => {
         const rect = progressBar.getBoundingClientRect();
         const percent = (e.clientX - rect.left) / rect.width;
         audioPlayer.currentTime = percent * audioPlayer.duration;
     });
 
-    // Volume control
     if (volumeControl) {
         volumeControl.addEventListener('input', (e) => {
             audioPlayer.volume = e.target.value / 100;
         });
-        // Set initial volume
         audioPlayer.volume = 0.7;
     }
 
-    // Auto-play next track when current one ends
     audioPlayer.addEventListener('ended', () => {
         loadTrack(currentTrack + 1, true);
     });
 }
 
-// Format time helper
 function formatTime(seconds) {
     if (!seconds || isNaN(seconds)) return '0:00';
     const mins = Math.floor(seconds / 60);
@@ -289,35 +277,12 @@ document.querySelectorAll('.project-card').forEach(card => {
 });
 
 // ========================================
-// LAZY LOAD IMAGES
-// ========================================
-
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                }
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ========================================
 // PROJECT IMAGE FALLBACK
 // ========================================
 
 document.querySelectorAll('.project-img').forEach((img, index) => {
     img.addEventListener('error', function () {
-        const fallbackColors = ['#ffd400', '#00c2cb', '#ff00ff', '#d4ff00', '#ff8a00', '#00c2cb'];
+        const fallbackColors = ['#c0392b', '#d4af37', '#b0b0b0', '#8b1a1a', '#a8842a', '#7a7a7a'];
         const fallback = document.createElement('div');
         fallback.textContent = this.alt || `PROJECT ${index + 1}`;
         fallback.style.width = '100%';
@@ -327,7 +292,7 @@ document.querySelectorAll('.project-img').forEach((img, index) => {
         fallback.style.display = 'flex';
         fallback.style.alignItems = 'center';
         fallback.style.justifyContent = 'center';
-        fallback.style.color = '#0a0a0a';
+        fallback.style.color = '#f5c542';
         fallback.style.fontSize = '1.1rem';
         fallback.style.fontWeight = '900';
         fallback.style.textTransform = 'uppercase';
@@ -349,7 +314,7 @@ if (qrImage) {
         fallback.textContent = 'QR';
         fallback.style.width = '100%';
         fallback.style.height = '100%';
-        fallback.style.background = '#ffd400';
+        fallback.style.background = '#d4af37';
         fallback.style.border = '3px solid #0a0a0a';
         fallback.style.display = 'flex';
         fallback.style.alignItems = 'center';
@@ -365,4 +330,4 @@ if (qrImage) {
 // INITIALIZE
 // ========================================
 
-console.log('FATHIR Portfolio loaded successfully');
+console.log('FATHIR Portfolio loaded — Dark Red × Silver × Gold theme');
