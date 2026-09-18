@@ -5,33 +5,22 @@
    ======================================== */
 
 :root {
-    /* Core Palette */
-    --black: #0a0a0a;
-    --black-2: #131313;
-    --black-3: #1a1a1a;
-    --white: #ffffff;
+    /* Neo-Brutalism Dark — Red × Silver × Off-White */
+    --black: #0A0A0A;
+    --black-2: #0F0F0F;
+    --black-3: #141414;
+    --off-white: #F2F2F2;
+    --off-white-soft: #D9D9D9;
+    --silver: #C0C0C0;
+    --silver-dark: #8A8A8A;
 
-    /* Red Family */
-    --red: #c0392b;
-    --red-bright: #e63946;
-    --red-deep: #8b1a1a;
-    --crimson: #dc143c;
-
-    /* Silver Family */
-    --silver: #b0b0b0;
-    --silver-light: #d9d9d9;
-    --silver-dark: #7a7a7a;
-    --chrome: #e8e8e8;
-
-    /* Deep Blue Family (Pengganti Gold) */
-    --blue: #1e3a8a;
-    --blue-bright: #2563eb;
-    --blue-deep: #0f2557;
-    --blue-navy: #152a5c;
-    --blue-glow: #3b82f6;
+    --red: #8B0000;
+    --red-bright: #B22222;
+    --red-deep: #5C0000;
+    --crimson: #A00000;
 
     /* Semantic */
-    --text: var(--chrome);
+    --text: var(--off-white);
     --text-muted: var(--silver);
     --bg: var(--black);
     --bg-alt: var(--black-2);
@@ -45,7 +34,6 @@
     --shadow-1: 4px 4px 0 var(--red);
     --shadow-2: 6px 6px 0 var(--red);
     --shadow-3: 10px 10px 0 var(--red);
-    --shadow-blue: 6px 6px 0 var(--blue);
     --shadow-silver: 6px 6px 0 var(--silver);
 
     /* Spacing */
