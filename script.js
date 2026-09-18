@@ -282,7 +282,7 @@ document.querySelectorAll('.project-card').forEach(card => {
 
 document.querySelectorAll('.project-img').forEach((img, index) => {
     img.addEventListener('error', function () {
-        const fallbackColors = ['#c0392b', '#d4af37', '#b0b0b0', '#8b1a1a', '#a8842a', '#7a7a7a'];
+        const fallbackColors = ['#c0392b', '#1e3a8a', '#b0b0b0', '#8b1a1a', '#0f2557', '#7a7a7a'];
         const fallback = document.createElement('div');
         fallback.textContent = this.alt || `PROJECT ${index + 1}`;
         fallback.style.width = '100%';
@@ -292,7 +292,7 @@ document.querySelectorAll('.project-img').forEach((img, index) => {
         fallback.style.display = 'flex';
         fallback.style.alignItems = 'center';
         fallback.style.justifyContent = 'center';
-        fallback.style.color = '#f5c542';
+        fallback.style.color = '#e8e8e8';
         fallback.style.fontSize = '1.1rem';
         fallback.style.fontWeight = '900';
         fallback.style.textTransform = 'uppercase';
@@ -314,12 +314,12 @@ if (qrImage) {
         fallback.textContent = 'QR';
         fallback.style.width = '100%';
         fallback.style.height = '100%';
-        fallback.style.background = '#d4af37';
+        fallback.style.background = '#1e3a8a';
         fallback.style.border = '3px solid #0a0a0a';
         fallback.style.display = 'flex';
         fallback.style.alignItems = 'center';
         fallback.style.justifyContent = 'center';
-        fallback.style.color = '#0a0a0a';
+        fallback.style.color = '#e8e8e8';
         fallback.style.fontSize = '32px';
         fallback.style.fontWeight = '900';
         qrImage.replaceWith(fallback);
@@ -330,4 +330,4 @@ if (qrImage) {
 // INITIALIZE
 // ========================================
 
-console.log('FATHIR Portfolio loaded — Dark Red × Silver × Gold theme');
+console.log('FATHIR Portfolio loaded — Dark Red × Silver × Deep Blue theme');
