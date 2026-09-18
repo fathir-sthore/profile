@@ -325,5 +325,22 @@ if (qrImage) {
         qrImage.replaceWith(fallback);
     });
 }
+// ========================================
+// DISABLE RIGHT-CLICK & LONG-PRESS ON IMAGES
+// ========================================
+
+document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG' || e.target.closest('.project-card')) {
+        e.preventDefault();
+    }
+});
+
+// Cegah long-press save di mobile
+document.querySelectorAll('img:not([data-clickable])').forEach(img => {
+    img.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+    }, { passive: false });
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+});
 
 console.log('FATHIR Portfolio loaded — Dark Red × Silver × Off-White theme');
