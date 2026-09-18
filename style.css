@@ -676,6 +676,8 @@ a {
     box-shadow: var(--shadow-2);
     overflow: hidden;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -685,26 +687,31 @@ a {
 
 .project-image {
     width: 100%;
-    height: 190px;
+    height: 200px;
     overflow: hidden;
     border-bottom: var(--border-w-lg) solid var(--black);
+    background: var(--paper);
+    position: relative;
 }
 
-.image-placeholder {
+.project-img {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--black);
-    font-weight: 900;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease-out;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.08);
 }
 
 .project-content {
     padding: var(--spacing-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-content h3 {
@@ -716,6 +723,7 @@ a {
     font-size: 0.92rem;
     margin-bottom: var(--spacing-md);
     font-weight: 600;
+    flex: 1;
 }
 
 .project-tech {
@@ -738,11 +746,22 @@ a {
 .project-buttons {
     display: flex;
     gap: var(--spacing-md);
+    flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-image {
+        height: 160px;
     }
 }
 
@@ -1102,7 +1121,6 @@ a {
     color: var(--black);
     font-size: 1.8rem;
     font-weight: 900;
-    color: var(--black);
 }
 
 .friend-card h4 {
@@ -1330,18 +1348,6 @@ a {
     50% {
         transform: scale(1.25);
     }
-}
-
-@keyframes slideInLeft {
-    from { width: 0; }
-}
-
-/* Scroll reveal (used by IntersectionObserver in script.js) */
-.skill-card,
-.project-card,
-.service-card,
-.friend-card {
-    animation: none;
 }
 
 /* ========================================

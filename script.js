@@ -312,8 +312,31 @@ if ('IntersectionObserver' in window) {
 }
 
 // ========================================
-// INITIALIZE
+// PROJECT IMAGE FALLBACK
 // ========================================
+
+document.querySelectorAll('.project-img').forEach((img, index) => {
+    img.addEventListener('error', function () {
+        const fallbackColors = ['#ffd400', '#00c2cb', '#ff00ff', '#d4ff00', '#ff8a00', '#00c2cb'];
+        const fallback = document.createElement('div');
+        fallback.textContent = this.alt || `PROJECT ${index + 1}`;
+        fallback.style.width = '100%';
+        fallback.style.height = '100%';
+        fallback.style.background = fallbackColors[index % fallbackColors.length];
+        fallback.style.border = 'none';
+        fallback.style.display = 'flex';
+        fallback.style.alignItems = 'center';
+        fallback.style.justifyContent = 'center';
+        fallback.style.color = '#0a0a0a';
+        fallback.style.fontSize = '1.1rem';
+        fallback.style.fontWeight = '900';
+        fallback.style.textTransform = 'uppercase';
+        fallback.style.letterSpacing = '1px';
+        fallback.style.textAlign = 'center';
+        fallback.style.padding = '1rem';
+        this.replaceWith(fallback);
+    });
+});
 
 // ========================================
 // QR IMAGE FALLBACK
@@ -337,5 +360,9 @@ if (qrImage) {
         qrImage.replaceWith(fallback);
     });
 }
+
+// ========================================
+// INITIALIZE
+// ========================================
 
 console.log('FATHIR Portfolio loaded successfully');
